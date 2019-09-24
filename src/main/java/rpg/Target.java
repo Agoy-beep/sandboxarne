@@ -8,4 +8,5 @@ public interface Target {
     int getMana();
     void setStamina(int stamina);
     int getStamina();
+    String getName();
 }

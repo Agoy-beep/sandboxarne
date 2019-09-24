@@ -46,4 +46,9 @@ public abstract class Enemy implements Target {
     public int getStamina() {
         return stamina;
     }
+
+    @Override
+    public String getName(){
+        return name;
+    }
 }

@@ -6,16 +6,16 @@ public abstract class Spell {
     private int amountOfDamage;
     private int amountOfHealing;
     private int manaCost;
+    private boolean isEquipped =  false;
+    private boolean isKnown = false;
 
-    public Spell(String name, int amountOfHealing, int manaCost) {
+    public Spell(String name, int amountOfHealing, int amountOfDamage, int manaCost, boolean isEquipped, boolean isKnown) {
         this.name = name;
         this.amountOfHealing = amountOfHealing;
-        this.manaCost = manaCost;
-    }
-    public Spell(int amountOfDamage, String name, int manaCost){
-        this.name = name;
         this.amountOfDamage = amountOfDamage;
         this.manaCost = manaCost;
+        this.isEquipped = isEquipped;
+        this.isKnown = isKnown;
     }
 
     public String getName() {
@@ -32,5 +32,21 @@ public abstract class Spell {
 
     public int getManaCost() {
         return manaCost;
+    }
+
+    public void setEquipped(boolean equipped) {
+        isEquipped = equipped;
+    }
+
+    public boolean isEquipped() {
+        return isEquipped;
+    }
+
+    public void setKnown(boolean known) {
+        isKnown = known;
+    }
+
+    public boolean isKnown() {
+        return isKnown;
     }
 }
