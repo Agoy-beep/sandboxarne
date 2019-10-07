@@ -10,7 +10,7 @@ public class Cell {
     }
 
 
-    public void checkNextLifeState() {
+    public void checkNextLifeState(int livingNeighboursCount) {
         if(isAlive){
             if(livingNeighboursCount < 2 || livingNeighboursCount > 3){
                 isAlive = false;

@@ -13,9 +13,8 @@ class CellTest {
         //GIVEN
         Cell testCell = new Cell(false);
 
-
         //WHEN
-        testCell.checkNextLifeState();
+        testCell.checkNextLifeState(3);
         //THEN
 
         Assertions.assertEquals(true, testCell.isAlive());

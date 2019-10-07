@@ -3,9 +3,11 @@ package game_of_life;
 public class GameOfLife {
 
     public static void main(String[] args) {
-        Board emptyBoard = new Board();
+        SetTheStage game = new SetTheStage();
 
-        emptyBoard.drawBoard();
-        emptyBoard.drawNextGen();
+        game.putALivingCellAtCoordinate(1, 3);
+
+
+
     }
 }
