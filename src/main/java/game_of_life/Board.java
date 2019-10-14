@@ -5,7 +5,7 @@ public class Board {
     public static final int AMOUNT_OF_ROWS = 8;
     public static final int AMOUNT_OF_COLUMNS = 8;
     private String[][] board;
-    private String[][] nextLifeCycleBoard;
+    private final String[][] nextLifeCycleBoard;
     private final String deadCellTile = "[ ]";
     private final String livingCellTile = "[X]";
     private boolean cellIsAlive;

@@ -13,7 +13,7 @@ public class Game {
         runMainMenu();
     }
 
-    public void aksUserToSelectLivingCells(){
+    public void askUserToSelectLivingCells(){
         int inputRow = getUserInputRow();
         int inputColumn = getUserInputColumn();
 
@@ -23,14 +23,18 @@ public class Game {
 
     private int getUserInputColumn() {
         System.out.println("Please specify a column for a living cell");
-        int inputColumn = Integer.parseInt(playerInput.nextLine());
+
         try{
-            if(inputColumn > gameBoard.AMOUNT_OF_COLUMNS){
-                throw new IllegalArgumentException();
+            int inputColumn = Integer.parseInt(playerInput.nextLine());
+            if(inputColumn < gameBoard.AMOUNT_OF_COLUMNS){
+                return inputColumn;
+            } else{
+                throw new ArrayIndexOutOfBoundsException();
             }
-            return inputColumn;
-        } catch (NumberFormatException numex){
+        } catch (IllegalArgumentException illegalArg){
             System.err.println("That wasn't right.");
+        } catch (ArrayIndexOutOfBoundsException arrindex){
+            System.err.println("Whoops, specified column doesn't exist.");
         }
         return this.getUserInputColumn();
     }
@@ -41,19 +45,26 @@ public class Game {
         try{
             int inputRow = Integer.parseInt(playerInput.nextLine());
             if(inputRow > gameBoard.AMOUNT_OF_ROWS){
-                throw new IllegalArgumentException();
+                throw new ArrayIndexOutOfBoundsException();
             }
             return inputRow;
         } catch (NumberFormatException numex){
             System.err.println("That wasn't right!");
+        }  catch (ArrayIndexOutOfBoundsException arrindex) {
+            System.err.println("Whoops, specified row doesn't exist.");
         }
         return this.getUserInputRow();
     }
 
     public void putALivingCellAtCoordinate(int row, int column){
-        gameBoard.getBoard()[row][column] = gameBoard.getLivingCellTile();
-        gameBoard.drawBoard();
-        System.out.println();
+        if(!gameBoard.getBoard()[row][column].equals(gameBoard.getLivingCellTile())){
+            gameBoard.getBoard()[row][column] = gameBoard.getLivingCellTile();
+            gameBoard.drawBoard();
+            System.out.println();
+        } else{
+            System.out.println("That cell is already alive!");
+            askUserToSelectLivingCells();
+        }
     }
 
     public void putALivingCellAtCoordinateWithoutPrintingBoard(int row, int column){
@@ -64,7 +75,7 @@ public class Game {
         System.out.println("Would you like to add another living cell? Yes/No: ");
         String playerAnswer = playerInput.nextLine();
         if(playerAnswer.toLowerCase().contains("y")){
-            this.aksUserToSelectLivingCells();
+            this.askUserToSelectLivingCells();
         } else{
             this.getGameBoard().drawBoard();
         }
@@ -127,6 +138,15 @@ public class Game {
         this.putALivingCellAtCoordinateWithoutPrintingBoard(2, 0);
         this.putALivingCellAtCoordinateWithoutPrintingBoard(3, 1);
         this.putALivingCellAtCoordinateWithoutPrintingBoard(6, 1);
+        this.putALivingCellAtCoordinateWithoutPrintingBoard(0, 1);
+        this.putALivingCellAtCoordinateWithoutPrintingBoard(0, 0);
+        this.putALivingCellAtCoordinateWithoutPrintingBoard(0, 2);
+        this.putALivingCellAtCoordinateWithoutPrintingBoard(1, 0);
+        this.putALivingCellAtCoordinateWithoutPrintingBoard(1, 5);
+        this.putALivingCellAtCoordinateWithoutPrintingBoard(7, 5);
+        this.putALivingCellAtCoordinateWithoutPrintingBoard(7, 1);
+        this.putALivingCellAtCoordinateWithoutPrintingBoard(7, 3);
+
 
         this.getGameBoard().calculateNewBoard();
         this.getGameBoard().drawNextLifeCycleBoard();
@@ -135,7 +155,7 @@ public class Game {
 
     public void runPlayerGameOfLife(){
         this.getGameBoard().setInitialBoard();
-        this.aksUserToSelectLivingCells();
+        this.askUserToSelectLivingCells();
         this.askUserToPressEnterToPrintNewLifeCycle();
     }
 }

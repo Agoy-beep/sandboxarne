@@ -1,7 +1,5 @@
 package be.arnegoyvaerts.sandboxarne.streams;
 
-import rpg.enemies.Enemy;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -61,7 +59,7 @@ public class EntrySet {
                 .collect(toMap(Person::getUUID, Person::getName));
     }
 
-    public Map<UUID, String> getHashmapWithUUIDAndStringThroughStreamsAlternate(){
+    public Map<UUID, String> getHashMapWithUUIDAndStringThroughStreamsAlternate(){
         return listOfPeople.stream()
                 .collect(groupingBy(Person::getUUID, mapping(Person::getName, joining(", ", "[", "]"))));
     }
@@ -75,7 +73,7 @@ public class EntrySet {
         System.out.println(set.getHashMapOfUUIDAndStringThroughStreams());
         System.out.println(set.useAnEntryMap());
         System.out.println(set.useAnEntryMapAlternate());
-        System.out.println(set.getHashmapWithUUIDAndStringThroughStreamsAlternate());
+        System.out.println(set.getHashMapWithUUIDAndStringThroughStreamsAlternate());
 
     }
 }
