@@ -1,4 +1,4 @@
-package be.arnegoyvaerts.sandboxarne.function_in_stream;
+package be.arnegoyvaerts.sandboxarne.functional_interfaces.function_in_stream;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,15 +1,14 @@
 package game_of_life;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class SetTheStageTest {
+class GameTest {
 
     @Test
     void givenALivingCell_whenAssignedASpecificLocation_thenAppearOnGameBoard() {
         //GIVEN
-        SetTheStage game = new SetTheStage();
+        Game game = new Game();
         //WHEN
         game.putALivingCellAtCoordinate(1, 3);
         //THEN
@@ -20,7 +19,7 @@ class SetTheStageTest {
     @Test
     void whenGivenANumberOfLivingCells_assertThatACellThatWillBecomeLivingIsDead() {
         //GIVEN
-        SetTheStage game = new SetTheStage();
+        Game game = new Game();
         //WHEN
         game.putALivingCellAtCoordinate(2, 3);
         game.putALivingCellAtCoordinate(0,2);

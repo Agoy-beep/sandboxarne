@@ -2,13 +2,13 @@ package game_of_life;
 
 import java.util.Scanner;
 
-public class SetTheStage {
+public class Game {
 
     private final Board gameBoard;
     public static int COUNT = 0;
     private final Scanner playerInput = new Scanner(System.in);
 
-    public SetTheStage() {
+    public Game() {
         this.gameBoard = new Board();
         runMainMenu();
     }

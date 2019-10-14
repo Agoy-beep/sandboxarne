@@ -3,6 +3,6 @@ package game_of_life;
 public class GameOfLife {
 
     public static void main(String[] args) {
-        SetTheStage game = new SetTheStage();
+        Game game = new Game();
     }
 }
