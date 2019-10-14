@@ -5,15 +5,10 @@ public class Board {
     public static final int AMOUNT_OF_ROWS = 8;
     public static final int AMOUNT_OF_COLUMNS = 8;
     private String[][] board;
+    private String[][] nextLifeCycleBoard;
     private final String deadCellTile = "[ ]";
     private final String livingCellTile = "[X]";
-    private int livingNeighbours = 0;
     private boolean cellIsAlive;
-    private String[][] nextLifeCycleBoard;
-
-    public String[][] getNextLifeCycleBoard() {
-        return nextLifeCycleBoard;
-    }
 
     public Board() {
         this.board = new String[AMOUNT_OF_ROWS][AMOUNT_OF_COLUMNS];
@@ -50,17 +45,6 @@ public class Board {
         board = nextLifeCycleBoard;
     }
 
-
-    public String[][] getBoard() {
-        return board;
-    }
-    public String getDeadCellTile() {
-        return deadCellTile;
-    }
-
-    public String getLivingCellTile() {
-        return livingCellTile;
-    }
     public void calculateNewBoard(){
         for(int row = 0; row < AMOUNT_OF_ROWS; row++){
             for(int column = 0; column < AMOUNT_OF_COLUMNS; column++){
@@ -68,18 +52,30 @@ public class Board {
             }
         }
     }
+
     public void calculateLivingNeighbours(String[][] board, int row, int column) {
-        livingNeighbours = 0;
-        if(row != 0 && row <= 6 && column != 0 && column <= 6){
-            for(int i = row - 1; i <= row + 1; i++){
-                for(int j = column - 1; j <= column + 1; j++){
-                    if(i == row && j == column){
-                        continue;
-                    }
-                    else{
-                        if(board[i][j].equals(getLivingCellTile())){
-                            livingNeighbours++;
-                        }
+        int livingNeighbours = 0;
+
+        if(board[row][column].equals("[X]")){
+            cellIsAlive = true;
+        }
+        else{
+            cellIsAlive = false;
+        }
+
+        int startRow = findStartRow(row);
+        int endRow = findEndRow(row);
+        int startColumn = findStartColumn(column);
+        int endColumn = findEndColumn(column);
+
+        for(int i = startRow; i <= endRow; i++){
+            for(int j = startColumn; j <= endColumn ; j++){
+                if(i == row && j == column){
+                    continue;
+                }
+                else{
+                    if(board[i][j].equals(getLivingCellTile())){
+                        livingNeighbours++;
                     }
                 }
             }
@@ -94,6 +90,42 @@ public class Board {
         }
     }
 
+    private int findEndColumn(int column) {
+        if(column + 1 >= 8){
+            return 7;
+        }
+        else{
+            return column + 1;
+        }
+    }
+
+    private int findStartColumn(int column) {
+        if(column - 1 < 0){
+            return column;
+        }
+        else{
+            return column - 1;
+        }
+    }
+
+    private int findEndRow(int row) {
+        if(row + 1 >= 8){
+            return 7;
+        }
+        else{
+            return row + 1;
+        }
+    }
+
+    private int findStartRow(int row) {
+        if(row == 0){
+            return row;
+        }
+        else{
+            return row - 1;
+        }
+    }
+
     public void checkNextLifeState(int livingNeighboursCount) {
         if(cellIsAlive){
             if(livingNeighboursCount < 2 || livingNeighboursCount > 3){
@@ -105,5 +137,21 @@ public class Board {
                 cellIsAlive = true;
             }
         }
+    }
+
+    public String[][] getBoard() {
+        return board;
+    }
+
+    public String getDeadCellTile() {
+        return deadCellTile;
+    }
+
+    public String[][] getNextLifeCycleBoard() {
+        return nextLifeCycleBoard;
+    }
+
+    public String getLivingCellTile() {
+        return livingCellTile;
     }
 }
