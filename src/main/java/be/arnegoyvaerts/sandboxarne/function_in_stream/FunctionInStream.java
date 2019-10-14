@@ -8,7 +8,6 @@ import java.util.function.Function;
 public class FunctionInStream {
 
     private final String message;
-    private Person personAtHand;
     private final List<Person> listOfPersons;
 
     public FunctionInStream(String message) {
